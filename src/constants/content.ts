@@ -14,7 +14,7 @@ export const barberContentIdeas: ContentIdea[] = [
     format: "REELS",
     title: "O degradê que muda o rosto em 30 segundos",
     script:
-      "Mostre o antes, corte rápido em 3 cenas e finalize com o resultado de frente e de lado.",
+      "Mostre o antes, corte rápido em três cenas e finalize com o resultado de frente e de lado.",
     caption:
       "Um degradê bem feito valoriza o formato do rosto e deixa o visual mais alinhado na hora.",
     cta: "Agende seu horário hoje.",
@@ -24,9 +24,9 @@ export const barberContentIdeas: ContentIdea[] = [
   {
     id: 2,
     format: "POST",
-    title: "3 sinais de que sua barba precisa de manutenção",
+    title: "Três sinais de que sua barba precisa de manutenção",
     script:
-      "Liste falhas aparentes, fios sem direção e desenho perdendo definição. Use foto limpa do acabamento.",
+      "Liste falhas aparentes, fios sem direção e desenho perdendo definição. Use uma foto limpa do acabamento.",
     caption:
       "Barba bonita não é só deixar crescer. Manutenção certa mantém o desenho e melhora o visual.",
     cta: "Me chame no direct e reserve seu ajuste.",
@@ -74,7 +74,7 @@ export const barberContentIdeas: ContentIdea[] = [
     format: "STORY",
     title: "Bastidor do acabamento",
     script:
-      "Grave 5 segundos da navalha, 5 segundos da escova e 5 segundos do resultado final.",
+      "Grave cinco segundos da navalha, cinco segundos da escova e cinco segundos do resultado final.",
     caption:
       "O detalhe do acabamento é o que separa um corte comum de um corte bem feito.",
     cta: "Toque no link e marque seu horário.",

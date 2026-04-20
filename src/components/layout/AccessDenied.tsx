@@ -19,13 +19,13 @@ export function AccessDenied() {
           <LockKeyhole size={24} />
         </div>
         <h1 className="text-3xl font-black tracking-tight text-zinc-50">
-          Acesso nao identificado
+          Acesso não identificado
         </h1>
         <p className="mt-4 text-base leading-7 text-zinc-400">
-          Use o link recebido apos a compra para acessar o gerador de conteudo.
+          Use o link recebido após a compra para acessar o gerador de conteúdo.
         </p>
         <MagneticButton href="/" className="mt-8 w-full">
-          Voltar para pagina inicial
+          Voltar para a página inicial
         </MagneticButton>
       </section>
     </main>

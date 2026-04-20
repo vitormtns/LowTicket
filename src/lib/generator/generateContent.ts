@@ -1,5 +1,7 @@
 import { classifyBusiness } from "@/lib/business/classifier";
 import { contentBlocks } from "@/lib/content/blocks";
+import { contentAngleLabels } from "@/lib/content/labels";
+import { tones } from "@/lib/content/tones";
 import type {
   ArchetypeData,
   ContentBlock,
@@ -8,7 +10,7 @@ import type {
   GeneratedContentItem,
 } from "@/lib/types";
 
-const fallbackBusiness = "negocio local";
+const fallbackBusiness = "negócio local";
 
 function randomItem<T>(items: T[]) {
   return items[Math.floor(Math.random() * items.length)];
@@ -43,15 +45,24 @@ function createItem(
   businessName: string,
   archetype: ArchetypeData
 ): GeneratedContentItem {
+  const toneProfile = randomItem(block.optionalToneProfiles ?? archetype.toneProfile);
+
   return {
     format: pickFormat(block),
     title: renderTemplate(randomItem(block.titleTemplates), businessName, archetype),
     body: renderTemplate(randomItem(block.bodyTemplates), businessName, archetype),
     cta: renderTemplate(randomItem(block.ctaTemplates), businessName, archetype),
-    why: block.whyItWorks,
+    why: renderTemplate(block.whyItWorks, businessName, archetype),
+    objective: renderTemplate(block.objective, businessName, archetype),
+    bestUseCase: renderTemplate(block.bestUseCase, businessName, archetype),
+    visualTip: renderTemplate(block.visualTip, businessName, archetype),
+    tone: tones[toneProfile].name,
+    impactLevel: block.impactLevel,
+    strategyNote: renderTemplate(block.strategyNote, businessName, archetype),
     businessName,
     archetype: archetype.id,
     angle: block.angle,
+    angleLabel: contentAngleLabels[block.angle],
   };
 }
 

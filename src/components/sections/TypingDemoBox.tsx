@@ -14,35 +14,40 @@ type DemoBlock = {
 function getDemoBlocks(result: GenerateContentResult | null, business: string): DemoBlock[] {
   const first = result?.content[0];
   const second = result?.content[1];
+  const businessLabel = result?.business || business || "hamburgueria artesanal";
 
   return [
     {
-      label: "Entrada",
-      text: `${business || "barbearia premium"}. Quero posts para atrair clientes hoje.`,
+      label: "Negócio",
+      text: `${businessLabel}. Quero conteúdos para atrair clientes com mais clareza.`,
     },
     {
-      label: "Analise",
+      label: result ? `Ideias geradas para: ${result.business}` : "Personalização",
       text: result
-        ? `Arquetipo detectado: ${result.archetypeData.name}. Angulos priorizados: ${result.archetypeData.allowedAngles.slice(0, 3).join(", ")}.`
-        : "Analisando o tipo de negocio, modelo de venda e angulos com maior potencial.",
+        ? `Baseado no seu tipo de negócio, estes são os conteúdos com maior chance de atrair clientes: ${result.summary.recommendedAnglesLabel.slice(0, 3).join(", ")}.`
+        : "O sistema identifica o perfil do negócio, o modelo de venda e os ângulos com maior potencial.",
     },
     {
-      label: "Gancho",
-      text: first?.title ?? "O detalhe que muda o resultado antes do cliente decidir.",
+      label: first ? `${first.format.toUpperCase()} · ${first.angleLabel}` : "REELS · Apetite + Urgência",
+      text: first?.title ?? "O burger do dia que ninguém resiste",
     },
     {
-      label: "Roteiro",
-      text: first?.body ?? "Mostre o problema, revele o processo e finalize com uma chamada simples.",
+      label: "Legenda",
+      text:
+        first?.body ??
+        "Tem coisa que não dá para explicar... só provar. Hoje o destaque da casa está saindo mais rápido do que a gente consegue fazer.",
     },
     {
-      label: "CTA",
-      text: second?.cta ?? "Envie QUERO no direct e receba uma sugestao.",
+      label: "CTA + Insight",
+      text: second
+        ? `${second.cta} ${second.strategyNote}`
+        : "Chama no WhatsApp e garante o seu. Posts com apelo visual + urgência aumentam pedidos imediatos.",
     },
   ];
 }
 
 export function TypingDemoBox() {
-  const [business, setBusiness] = useState("barbearia premium");
+  const [business, setBusiness] = useState("hamburgueria artesanal");
   const [visibleBlocks, setVisibleBlocks] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState<GenerateContentResult | null>(null);
@@ -94,11 +99,14 @@ export function TypingDemoBox() {
     >
       <div className="mb-8 text-center">
         <p className="text-sm font-bold uppercase tracking-[0.18em] text-amber-400">
-          Demo inteligente
+          Demonstração personalizada
         </p>
         <h2 className="mt-4 text-3xl font-black tracking-tight text-zinc-50 sm:text-5xl">
-          Digite um negocio e veja a pauta se adaptar
+          O Content Blueprint adapta as ideias ao seu tipo de negócio.
         </h2>
+        <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-zinc-400 sm:text-base">
+          Não é uma lista genérica. Cada sugestão vem com direção, contexto, CTA e o motivo por trás do post.
+        </p>
       </div>
 
       <div className="overflow-hidden rounded-lg border border-zinc-800 bg-zinc-900/50 shadow-2xl shadow-black/40 backdrop-blur">
@@ -121,13 +129,13 @@ export function TypingDemoBox() {
                 htmlFor="demo-business"
                 className="text-xs font-bold uppercase tracking-[0.18em] text-zinc-500"
               >
-                Tipo de negocio
+                Qual é o seu negócio?
               </label>
               <input
                 id="demo-business"
                 value={business}
                 onChange={(event) => setBusiness(event.target.value)}
-                placeholder="Ex: hamburgueria artesanal"
+                placeholder="Ex: barbearia, hamburgueria, clínica..."
                 className="focus-ring mt-3 min-h-12 w-full rounded-lg border border-zinc-800 bg-zinc-950 px-4 text-sm text-zinc-100 outline-none transition placeholder:text-zinc-600 focus:border-amber-400"
               />
               <button
@@ -136,19 +144,27 @@ export function TypingDemoBox() {
                 className="focus-ring mt-3 flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-amber-500 px-4 py-3 text-sm font-bold text-zinc-950 shadow-[0_0_0_rgba(245,158,11,0)] transition hover:bg-amber-400 hover:shadow-[0_0_42px_rgba(245,158,11,0.34)] active:scale-95 disabled:pointer-events-none disabled:opacity-60"
               >
                 <Sparkles size={16} />
-                {isLoading ? "Analisando..." : "Analisar negocio"}
+                {isLoading ? "Analisando..." : "Ver ideias para este negócio"}
               </button>
             </form>
 
             <div className="mt-5 rounded-lg border border-zinc-800 bg-zinc-950/70 p-4">
               <p className="min-h-20 text-sm leading-7 text-zinc-300">
-                {isLoading ? "Classificando modelo de venda, tom e angulos..." : blocks[0].text}
+                {isLoading ? "Identificando perfil, venda e ângulos..." : blocks[0].text}
                 <motion.span
                   animate={{ opacity: [0, 1, 0] }}
                   transition={{ duration: 0.8, repeat: Infinity }}
                   className="ml-1 inline-block h-5 w-2 translate-y-1 rounded-sm bg-amber-400"
                 />
               </p>
+            </div>
+
+            <div className="mt-4 grid gap-2 text-xs sm:grid-cols-3">
+              {["Perfil", "Formato", "Contexto"].map((item) => (
+                <div key={item} className="rounded-lg border border-zinc-800 bg-zinc-950/45 p-3 text-zinc-400">
+                  {item}
+                </div>
+              ))}
             </div>
           </div>
 

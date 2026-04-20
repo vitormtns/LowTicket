@@ -1,8 +1,21 @@
 import { businessAliases } from "@/lib/business/aliases";
 import { archetypes } from "@/lib/business/archetypes";
-import type { Archetype, BusinessClassification } from "@/lib/types";
+import { contentAngleLabels } from "@/lib/content/labels";
+import type { Archetype, ArchetypeData, BusinessClassification, BusinessStrategySummary } from "@/lib/types";
 
 const fallbackArchetype: Archetype = "servico_local";
+
+const visualStrengthLabels: Record<ArchetypeData["visualStrength"], string> = {
+  baixa: "Apelo visual baixo",
+  media: "Apelo visual médio",
+  alta: "Apelo visual alto",
+};
+
+const trustNeedLabels: Record<ArchetypeData["trustNeed"], string> = {
+  baixo: "Confiança de nível baixo",
+  medio: "Confiança de nível médio",
+  alto: "Confiança de nível alto",
+};
 
 export function normalizeBusinessInput(input: string) {
   return input
@@ -43,6 +56,18 @@ function scoreAlias(normalizedBusiness: string, alias: string) {
   return 0;
 }
 
+function createSummary(archetypeData: ArchetypeData): BusinessStrategySummary {
+  return {
+    saleModelLabel: archetypeData.saleModel,
+    visualStrengthLabel: visualStrengthLabels[archetypeData.visualStrength],
+    trustNeedLabel: trustNeedLabels[archetypeData.trustNeed],
+    recommendedAnglesLabel: archetypeData.allowedAngles
+      .slice(0, 4)
+      .map((angle) => contentAngleLabels[angle]),
+    bestApproachLabel: archetypeData.bestApproach,
+  };
+}
+
 export function classifyBusiness(business: string): BusinessClassification {
   const normalizedBusiness = normalizeBusinessInput(business);
   let bestMatch: {
@@ -72,6 +97,7 @@ export function classifyBusiness(business: string): BusinessClassification {
     normalizedBusiness,
     archetype,
     archetypeData: archetypes[archetype],
+    summary: createSummary(archetypes[archetype]),
     matchedAlias: bestMatch?.score ? bestMatch.alias : undefined,
   };
 }

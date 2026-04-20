@@ -11,7 +11,7 @@ export async function POST(request: Request) {
 
   if (!business.trim()) {
     return NextResponse.json(
-      { error: "Informe o campo business para classificar o negocio." },
+      { error: "Informe o campo business para classificar o negócio." },
       { status: 400 }
     );
   }

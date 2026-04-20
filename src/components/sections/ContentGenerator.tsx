@@ -56,7 +56,7 @@ export function ContentGenerator() {
     event?.preventDefault();
 
     if (!business.trim()) {
-      setError("Informe o tipo de negocio para gerar ideias personalizadas.");
+      setError("Informe o tipo de negócio para gerar ideias personalizadas.");
       return;
     }
 
@@ -73,13 +73,13 @@ export function ContentGenerator() {
       });
 
       if (!response.ok) {
-        throw new Error("Falha ao gerar conteudo.");
+        throw new Error("Falha ao gerar conteúdo.");
       }
 
       const data = (await response.json()) as GenerateContentResult;
       setResult(data);
     } catch {
-      setError("Nao foi possivel gerar agora. Tente novamente em alguns segundos.");
+      setError("Não foi possível gerar agora. Tente novamente em alguns segundos.");
     } finally {
       setIsLoading(false);
     }
@@ -121,20 +121,21 @@ export function ContentGenerator() {
                   Motor mockado inteligente
                 </div>
                 <h2 className="max-w-3xl text-4xl font-black leading-[1.02] tracking-tight text-zinc-50 sm:text-5xl">
-                  Crie uma pauta pronta para o seu tipo de negocio.
+                  Crie uma pauta pronta para o seu tipo de negócio.
                 </h2>
                 <p className="mt-4 max-w-2xl text-sm leading-7 text-zinc-400 sm:text-base">
-                  Informe o negocio. O sistema classifica o arquitipo e combina blocos de conteudo compativeis.
+                  Informe o negócio. O sistema classifica o arquétipo, interpreta o modelo de venda e combina blocos de conteúdo compatíveis.
                 </p>
 
                 {result ? (
                   <div className="mt-5 rounded-lg border border-zinc-800 bg-zinc-950/60 p-4">
                     <p className="text-sm font-semibold text-zinc-200">
-                      Ideias para:{" "}
+                      Conteúdos gerados para:{" "}
                       <span className="text-amber-300">{result.business}</span>
                     </p>
-                    <p className="mt-1 text-xs text-zinc-500">
-                      Gerado com base no seu tipo de negocio: {result.archetypeData.name}.
+                    <p className="mt-1 text-xs leading-5 text-zinc-500">
+                      Perfil detectado: {result.archetypeData.name}. Melhor abordagem:{" "}
+                      {result.summary.bestApproachLabel}.
                     </p>
                   </div>
                 ) : null}
@@ -145,7 +146,7 @@ export function ContentGenerator() {
                 className="rounded-lg border border-zinc-800 bg-zinc-950/70 p-4"
               >
                 <label className="text-sm font-semibold text-zinc-300" htmlFor="business">
-                  Qual e o seu negocio?
+                  Qual é o seu negócio?
                 </label>
                 <input
                   id="business"
@@ -160,7 +161,7 @@ export function ContentGenerator() {
                   className="mt-4 w-full gap-2"
                 >
                   <Sparkles size={18} />
-                  {isLoading ? "Analisando negocio..." : "Gerar 10 ideias agora"}
+                  {isLoading ? "Analisando negócio..." : "Gerar 10 ideias agora"}
                 </MagneticButton>
                 {error ? <p className="mt-3 text-sm text-red-300">{error}</p> : null}
               </form>
@@ -169,16 +170,61 @@ export function ContentGenerator() {
 
           {isLoading ? <SkeletonCards /> : null}
 
+          {!isLoading && result ? (
+            <motion.section
+              {...reveal}
+              className="mb-5 rounded-lg border border-zinc-800 bg-zinc-900/45 p-5 shadow-2xl shadow-black/20 backdrop-blur"
+            >
+              <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-amber-400">
+                    Resumo estratégico
+                  </p>
+                  <h2 className="mt-2 text-2xl font-black tracking-tight text-zinc-50">
+                    Estratégia sugerida para {result.business}
+                  </h2>
+                  <p className="mt-3 text-sm leading-7 text-zinc-400">
+                    {result.archetypeData.strategyDescription}
+                  </p>
+                </div>
+
+                <div className="grid gap-3 sm:grid-cols-3">
+                  {[
+                    ["Modelo de venda", result.summary.saleModelLabel],
+                    ["Força visual", result.summary.visualStrengthLabel],
+                    ["Confiança exigida", result.summary.trustNeedLabel],
+                  ].map(([label, value]) => (
+                    <div key={label} className="rounded-lg border border-zinc-800 bg-zinc-950/55 p-4">
+                      <p className="text-xs font-bold text-zinc-500">{label}</p>
+                      <p className="mt-2 text-sm font-semibold leading-5 text-zinc-100">{value}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mt-5 flex flex-wrap gap-2">
+                {result.summary.recommendedAnglesLabel.map((angle) => (
+                  <span
+                    key={angle}
+                    className="rounded-full border border-amber-300/20 bg-amber-400/10 px-3 py-1 text-xs font-bold text-amber-200"
+                  >
+                    {angle}
+                  </span>
+                ))}
+              </div>
+            </motion.section>
+          ) : null}
+
           {!isLoading && content.length === 0 ? (
             <motion.div
               {...reveal}
               className="rounded-lg border border-dashed border-zinc-700 bg-zinc-900/35 p-8 text-center backdrop-blur"
             >
               <h2 className="text-2xl font-black tracking-tight text-zinc-50">
-                Sua estrategia personalizada vai aparecer aqui
+                Sua estratégia personalizada vai aparecer aqui
               </h2>
               <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-zinc-400">
-                Digite um exemplo como clinica odontologica, pet shop ou loja feminina para ver o motor adaptar os cards.
+                Digite um exemplo como clínica odontológica, pet shop ou loja feminina para ver o motor adaptar os cards.
               </p>
             </motion.div>
           ) : null}

@@ -16,13 +16,18 @@ export type ContentAngle =
   | "prova_social"
   | "autoridade"
   | "promocao"
+  | "venda_direta"
   | "apetite"
   | "produto_destaque"
   | "educacao"
   | "novidade"
   | "confianca"
   | "rotina"
-  | "resultado";
+  | "resultado"
+  | "curiosidade"
+  | "urgencia"
+  | "objecao"
+  | "engajamento_local";
 
 export type ContentFormat = "reels" | "post" | "story" | "carrossel";
 
@@ -50,6 +55,16 @@ export type ArchetypeData = {
   urgencyStyle: "escassez" | "agenda" | "desejo" | "dor" | "sazonal";
   toneProfile: ToneProfileId[];
   allowedAngles: ContentAngle[];
+  strategyDescription: string;
+  bestApproach: string;
+};
+
+export type BusinessStrategySummary = {
+  saleModelLabel: string;
+  visualStrengthLabel: string;
+  trustNeedLabel: string;
+  recommendedAnglesLabel: string[];
+  bestApproachLabel: string;
 };
 
 export type BusinessClassification = {
@@ -57,6 +72,7 @@ export type BusinessClassification = {
   normalizedBusiness: string;
   archetype: Archetype;
   archetypeData: ArchetypeData;
+  summary: BusinessStrategySummary;
   matchedAlias?: string;
 };
 
@@ -74,6 +90,11 @@ export type ContentBlock = {
   bodyTemplates: string[];
   ctaTemplates: string[];
   whyItWorks: string;
+  objective: string;
+  bestUseCase: string;
+  visualTip: string;
+  strategyNote: string;
+  impactLevel: "baixo" | "medio" | "alto";
   optionalToneProfiles?: ToneProfileId[];
 };
 
@@ -83,9 +104,16 @@ export type GeneratedContentItem = {
   body: string;
   cta: string;
   why: string;
+  objective: string;
+  bestUseCase: string;
+  visualTip: string;
+  tone: string;
+  impactLevel: "baixo" | "medio" | "alto";
+  strategyNote: string;
   businessName: string;
   archetype: Archetype;
   angle: ContentAngle;
+  angleLabel: string;
 };
 
 export type GenerateContentResult = BusinessClassification & {

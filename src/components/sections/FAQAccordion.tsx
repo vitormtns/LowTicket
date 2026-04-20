@@ -5,24 +5,24 @@ import { useState } from "react";
 
 const faqs = [
   {
-    question: "Como funciona?",
+    question: "Mas isso serve para o meu negócio?",
     answer:
-      "Você acessa o gerador, clica para criar ideias e recebe cards com gancho, roteiro, legenda e chamada para ação.",
+      "Sim. O sistema adapta as ideias com base no tipo de negócio que você tem.",
   },
   {
-    question: "Preciso saber marketing?",
+    question: "Preciso entender de marketing?",
     answer:
-      "Não. A proposta é entregar ideias simples, prontas e fáceis de adaptar para a rotina da sua barbearia.",
+      "Não. Você só precisa copiar, adaptar e postar.",
   },
   {
-    question: "Serve para outros negócios?",
+    question: "Funciona mesmo?",
     answer:
-      "Este MVP está focado em barbearias, mas a estrutura pode ser adaptada para estética, clínicas, restaurantes e outros negócios locais.",
+      "Os conteúdos são baseados em padrões que funcionam para negócios locais.",
   },
   {
-    question: "Como acesso?",
+    question: "Isso é só um PDF?",
     answer:
-      "No MVP, o acesso funciona por um link com token. Exemplo: /app?token=abc123.",
+      "Não. Você informa o negócio, recebe ideias adaptadas ao perfil detectado e vê direção estratégica, formato, CTA e contexto de uso.",
   },
 ];
 
@@ -30,7 +30,7 @@ export function FAQAccordion() {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <div className="divide-y divide-[#E5E5E5] rounded-lg border border-[#E5E5E5] bg-white">
+    <div className="divide-y divide-zinc-800 rounded-lg border border-zinc-800 bg-zinc-900/50 shadow-2xl shadow-black/25 backdrop-blur">
       {faqs.map((faq, index) => {
         const isOpen = openIndex === index;
 
@@ -42,14 +42,14 @@ export function FAQAccordion() {
               className="focus-ring flex w-full items-center justify-between gap-4 px-5 py-5 text-left"
               aria-expanded={isOpen}
             >
-              <span className="font-semibold text-black">{faq.question}</span>
+              <span className="font-semibold text-zinc-50">{faq.question}</span>
               <ChevronDown
                 size={20}
-                className={`shrink-0 text-[#666666] transition ${isOpen ? "rotate-180" : ""}`}
+                className={`shrink-0 text-zinc-500 transition ${isOpen ? "rotate-180" : ""}`}
               />
             </button>
             {isOpen ? (
-              <p className="px-5 pb-5 text-sm leading-6 text-[#666666]">{faq.answer}</p>
+              <p className="px-5 pb-5 text-sm leading-6 text-zinc-400">{faq.answer}</p>
             ) : null}
           </div>
         );
