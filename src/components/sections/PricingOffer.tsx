@@ -47,7 +47,7 @@ export function PricingOffer() {
                 </li>
               ))}
             </ul>
-            <MagneticButton href="/app?token=abc123" className="mt-7 w-full gap-2">
+            <MagneticButton href="https://pay.kiwify.com.br/mgUnDLf" className="mt-7 w-full gap-2">
               Quero conteúdos para o meu negócio
               <ArrowRight size={18} />
             </MagneticButton>

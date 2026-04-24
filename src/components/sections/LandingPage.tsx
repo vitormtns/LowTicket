@@ -41,7 +41,7 @@ export function LandingPage() {
       <Section className="pt-8 sm:pt-10">
         <header className="mb-14 flex items-center justify-between gap-4">
           <div className="text-base font-bold tracking-tight">Content Blueprint</div>
-          <Button href="/app?token=abc123" variant="secondary" className="hidden sm:inline-flex">
+          <Button href="https://pay.kiwify.com.br/mgUnDLf" variant="secondary" className="hidden sm:inline-flex">
             Ver gerador
           </Button>
         </header>
@@ -59,7 +59,7 @@ export function LandingPage() {
               Menos tela em branco, mais clientes chamando no direct.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button href="/app?token=abc123" className="w-full sm:w-auto">
+              <Button href="https://pay.kiwify.com.br/mgUnDLf" className="w-full sm:w-auto">
                 Gerar minhas ideias agora
               </Button>
               <Button href="#demo" variant="secondary" className="w-full sm:w-auto">
@@ -138,7 +138,7 @@ export function LandingPage() {
             </p>
           </div>
           <div className="lg:text-right">
-            <Button href="/app?token=abc123" className="w-full lg:w-auto">
+            <Button href="https://pay.kiwify.com.br/mgUnDLf" className="w-full lg:w-auto">
               Gerar minhas ideias agora
             </Button>
             <p className="mt-3 text-sm text-[#666666]">Acesso por link. Sem instalação.</p>
@@ -154,7 +154,7 @@ export function LandingPage() {
       </Section>
 
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[#E5E5E5] bg-white/95 p-3 backdrop-blur sm:hidden">
-        <Button href="/app?token=abc123" className="w-full">
+        <Button href="https://pay.kiwify.com.br/mgUnDLf" className="w-full">
           Gerar minhas ideias agora
         </Button>
       </div>

@@ -326,7 +326,7 @@ export function PremiumLandingPage() {
                       Isso é só uma amostra do que o sistema pode gerar para o seu negócio. Desbloqueie o acesso completo para gerar quantas ideias quiser.
                     </p>
                   </div>
-                  <MagneticButton href="#preco" className="mt-4 w-full shrink-0 gap-2 sm:mt-0 sm:w-auto">
+                  <MagneticButton href="https://pay.kiwify.com.br/mgUnDLf" className="mt-4 w-full shrink-0 gap-2 sm:mt-0 sm:w-auto">
                     Quero desbloquear o acesso completo
                     <ArrowRight size={18} />
                   </MagneticButton>
@@ -411,7 +411,7 @@ export function PremiumLandingPage() {
             Comece a postar com estratégia e veja a diferença.
           </motion.p>
           <motion.div variants={staggerItem} className="mt-8">
-            <MagneticButton href="/app?token=abc123" className="w-full gap-2 sm:w-auto">
+            <MagneticButton href="https://pay.kiwify.com.br/mgUnDLf" className="w-full gap-2 sm:w-auto">
               Começar agora
               <ArrowRight size={18} />
             </MagneticButton>
@@ -424,7 +424,7 @@ export function PremiumLandingPage() {
       </footer>
 
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-zinc-800 bg-zinc-950/90 p-3 backdrop-blur sm:hidden">
-        <MagneticButton href="#preco" className="w-full gap-2">
+        <MagneticButton href="https://pay.kiwify.com.br/mgUnDLf" className="w-full gap-2">
           Quero desbloquear o acesso completo
           <ArrowRight size={18} />
         </MagneticButton>
